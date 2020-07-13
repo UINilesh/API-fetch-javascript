@@ -1,0 +1,65 @@
+<style>
+ 
+table td {
+  border: 1px solid #ddd;
+   padding: 12px;
+  text-align: left;
+}
+table th {
+  padding: 12px;
+  text-align: left;
+  background-color: #4CAF50;
+  color: white;
+}
+
+table tr:nth-child(even){background-color: #f2f2f2;}
+
+table tr:hover {background-color: #ddd;}
+ 
+</style>
+ 
+ 
+<script type="text/javascript">
+       fetch('https://ghibliapi.herokuapp.com/people')
+            .then(function (response) {
+                return response.json();
+            })
+            .then(function (data) {
+                appendData(data);
+            })
+            .catch(function (err) {
+                console.log('error: ' + err);
+            });
+			
+           function appendData(data) {
+            let mainContainer = document.getElementById("myData");
+            for (let i = 0; i < data.length; i++) {
+			 
+                let tr = document.createElement("tr");
+		 
+				 let td = document.createElement("td");
+			 
+                tr.innerHTML = '<td>' + i + '</td>' + '<td>' + data[i].name + '</td>' 
+				+ '<td>' + data[i].gender + '</td>' + '<td>' + data[i].age + '</td>' + '<td>' + data[i].eye_color + '</td>' + 
+				'<td>' + data[i].hair_color + '</td>'
+                mainContainer.appendChild(tr);
+			 
+            }
+			
+        }
+		
+ 
+</script>
+
+
+<table id="myData" width="100%" cellpadding="0" cellspacing="0">
+<tr>
+<th>No</th>
+<th>Name</th>
+<th>Gender</th>
+<th>Age</th>
+<th>Eye Color</th>
+<th>Hair Color</th>
+</tr>
+</table>
+
